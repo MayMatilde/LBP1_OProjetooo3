@@ -4,28 +4,124 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sei lá</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #023047
+        }
+
+        .page {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            align-content: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            margin: 0;
+        }
+
+        .formLogin {
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+            border-radius: 7px;
+            padding: 40px;
+            box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.4);
+            gap: 5px;
+            text-align: center;
+            width: 300px;
+            margin: auto;
+        }
+
+        .formLogin h1 {
+            padding: 0;
+            margin: 0;
+            font-weight: 500;
+            font-size: 1.8em;
+        }
+
+        .formLogin p {
+            display: inline-block;
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .formLogin input {
+            padding: 10px;
+            font-size: 12px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            margin-top: 5px;
+            border-radius: 4px;
+            transition: all linear 160ms;
+            outline: none;
+            text-align: center;
+        }
+
+
+        .formLogin input:focus {
+            border: 1px solid #f72585;
+        }
+
+        .formLogin label {
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .formLogin a {
+            display: inline-block;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #555;
+            transition: all linear 160ms;
+            text-align: center;
+        }
+
+        .formLogin a:hover {
+            color: #f72585;
+        }
+
+        .btn {
+            background-color: #f72585;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            border: none !important;
+            transition: all linear 160ms;
+            cursor: pointer;
+            margin: 0 !important;
+            text-align: center;
+
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            background-color: #ff0676;
+
+        }
+    </style>
 </head>
 <body>
-    <h1>Divirta-se com Livros:</h1>
-    <form action="/add" method="post">
-        <label>Digite o nome do Livro:</label>
-        <br>
-        <input type="text" name="nome" placeholder="Digite please" required>
-        <br>
-        <label>Digite o autor ou autora:</label>
-        <br>
-        <input type="text" name="autor" placeholder="Digite o autor" required>
-        <br>
-        <label>Gostou do livro?</label>
-        <br>
-        <input type="text" name="gosto" placeholder="Digite yes or no?" required>
-        <br>        <br>
-        <button type="submit">Adicionar</button>
-    </form>
-    <ul>
-        {% for livro in listaLivros %}
-          <li>{{ livro.nome }} - {{ livro.autor }} - {{ livro.gosto }}</li>
-        {% endfor %}
-    </ul>
+    <div class="page">
+        <form method="post" class="formLogin">
+            <h1>Login do usuário</h1>
+            <p>Digite seus dados:</p>
+            <label for="text">Nome de usuário</label>
+            <input type="text" placeholder="digite seu nome de uauário" required>
+            <label for="password">Senha:</label>
+            <input type="password" placeholder="digite sua senha" required>
+            <input type="submit" value="Acessar" class="btn">
+        </form>
+    </div>
+</body>
+
+</html>
 </body>
 </html>

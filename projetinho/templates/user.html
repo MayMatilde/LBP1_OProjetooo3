@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela inicial</title>
+</head>
+<body>
+    {% if usuario %}
+      <h1>Bem-vindo, {{ usuario }}</h1>
+      <p><a href="{{ url_for('arraso.logout') }}">Logout</a></p>
+    {% else %}
+      <h1>Seja bem vindo!!</h1>
+      <p><a href="{{ url_for('arraso.logout') }}">Login</a></p>
+    {% endif %}
+</body>
+</html> 

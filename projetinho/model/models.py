@@ -1,7 +1,7 @@
 class User:
-    def __init__(self, username, password):
-        self.username = username
+    def __init__(self, usernameCLT, password):
+        self.usernameCLT = usernameCLT
         self.password = password 
 
-def validate(self, username, password):
-    return self.username == username and self.password == password
+def Verfica(self, usernameCLT, password):
+    return self.usernameCLT == User and self.password == password

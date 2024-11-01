@@ -1,51 +1,45 @@
 from flask import Blueprint, render_template, request, redirect, session, url_for, flash
-from model.models import User
+from model.models import usuarios 
 
-Adm = User("Adm o melhor", "123adm")
-Usuario1 = User ("UserCLT", "9090clt")
-ListaUser = [Adm, Usuario1]
 
-vamos_arrasar = Blueprint('arraso', __name__)
+vamos_arrasar = Blueprint('vamos_arrasar', __name__)
 
-#Página inicial!!! =)🥳
-@vamos_arrasar.route('/', methods=['POST', 'GET'])
+#Página inicial🥳
+@vamos_arrasar.route('/')
 def visu():
-    user_acesso = session.get('user_acesso')
-    return render_template('user.html', user=user_acesso)
-
-# @vamos_arrasar.before_request
-# def autentica_user():
-#     segura = request.endpoint in ['arraso.protected']
-
-#     if segura and 'user_acesso' not in session:
-#         flash("Você precisa logar para acessar o sistema!")
-#         return redirect(url_for('arraso.index'))
+    if 'name' in session:
+        nome_usuario = session.get('name')
+        return render_template('login.html', nome_usuario=nome_usuario)
+    else:
+        return render_template('user.html')
+  
 
 
-#rota do login =)🥰 and self.password == passwo and self.password == passwordrd
-@vamos_arrasar.route('/login', methods=['POST', 'GET'])
-def index():
+
+#Rota da página de login 😍
+@vamos_arrasar.route('/login', methods=['GET', 'POST'])
+def login (): 
     if request.method == 'POST':
-       session['usuario'] = request.form['username']
-       return redirect(url_for('arraso.index'))
+        nome = request.form['username']
+        senha = request.form['password']
+        for usuario in usuarios:
+             if nome == usuario.nome and senha == usuario.senha:
+                session['name'] = usuario.nome
+                return redirect(url_for('vamos_arrasar.autentica'))
+             else:
+                 flash('Usuário ou senha inválidos!')
     return render_template('index.html')
 
-#rota autentica=)😀
-@vamos_arrasar.route('/autentica', methods=['POST'])
-def autentica_user():
-    username = request.form['username']
-    password = request.form['password']
-    
-    for User in ListaUser:
-        if username == User.usernameCLT and password == User.password:
-            session['user_acesso'] = User.usernameCLT
-            flash(f'{User.usernameCLT} Só sucesso! Login feito')
-            return redirect(url_for('arraso.index'))
-    flash('Usuário ou senha incorreta. 403')
-    return redirect(url_for('arraso.html'))
+#Rota autentica 😉
+@vamos_arrasar.route('/autentica')
+def autentica():
+    return redirect(url_for('vamos_arrasar.login'))
 
-#rota logout =)😍
+#Rota logout😁
 @vamos_arrasar.route('/logout')
 def logout():
-    session.pop('user_acesso', None)
-    return redirect(url_for('arraso.login'))
+    session.pop('name', None) 
+    return redirect(url_for('vamos_arrasar.login'))
+
+
+

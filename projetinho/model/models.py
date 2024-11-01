@@ -1,7 +1,6 @@
 class User:
-    def __init__(self, usernameCLT, password):
-        self.usernameCLT = usernameCLT
-        self.password = password 
+    def __init__(self, nome, senha):
+        self.nome = nome
+        self.senha = senha 
 
-def Verfica(self, usernameCLT, password):
-    return self.usernameCLT == User and self.password == password
+usuarios = [ User("UserCLT", "123clt"), User("AdmShow", "456")]

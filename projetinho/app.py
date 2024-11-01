@@ -1,4 +1,4 @@
-from flask import Flask, session, redirect, url_for, request, render_template
+from flask import Flask 
 from controllers.controller import vamos_arrasar
 
 app = Flask(__name__)

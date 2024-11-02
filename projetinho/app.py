@@ -9,3 +9,7 @@ app.secret_key = 'JesusVive'  #chave para acessar os cookies da sessão para que
 if __name__ == '__main__':
     app.run(debug=True)
 
+
+
+
+

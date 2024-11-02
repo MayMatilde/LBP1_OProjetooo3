@@ -3,4 +3,5 @@ class User:
         self.nome = nome
         self.senha = senha 
 
-usuarios = [ User("UserCLT", "123clt"), User("AdmShow", "456")]
+usuarios = [ User("Filha amada", "123clt"), User("Filho amado", "456")]
+

@@ -3,115 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login do Usuário</title>
+    <title>Login</title>
     <style>
+        :root {
+            --primary-color: #f72585;
+            --text-color: #023047;
+            --background-color: #fff;
+            --input-border-color: #ccc;
+            --input-focus-border-color: #f72585;
+        }
+
         body {
-            background-color: #f8edeb; 
-            font-family: 'Comic Sans MS', 'Arial', sans-serif; 
-            color: #333;
-            text-align: center;
+            font-family: 'Inter', sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            color: var(--text-color);
+            background-color: #e7bed0; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh; 
         }
 
-        .container {
-            background-color: #fff5f7;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            display: inline-block;
-            max-width: 400px;
-            width: 100%;
+        .formLogin {
+            display: flex;
+            flex-direction: column;
+            background-color: var(--background-color);
+            border-radius: 7px;
+            padding: 40px;
+            box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.4);
+            gap: 5px;
+            width: 300px;
+            text-align: center; 
         }
 
-        h1 {
-            color: #ff6b6b; 
-            font-size: 2em;
-            margin-bottom: 10px;
-        }
-
-        p {
-            margin-bottom: 20px;
-            font-size: 1.1em;
-            color: #2d3436; 
-        }
-
-        label {
-            display: block;
-            text-align: left;
+        .formLogin h1 {
+            margin: 0;
+            font-weight: 500;
+            font-size: 1.8em;
             font-weight: bold;
-            margin-bottom: 5px;
-            color: #555;
         }
 
-        input[type="text"], input[type="password"] {
-            width: 100%;
+        .formLogin p {
+            font-size: 12px;
+            color: #a09f9f;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+
+        .formLogin input {
             padding: 10px;
-            margin-bottom: 15px;
-            border-radius: 10px;
-            border: 1px solid #ddd;
-            box-sizing: border-box;
-            font-size: 1em;
-            font-family: 'Comic Sans MS', 'Arial', sans-serif; 
+            font-size: 12px;
+            border: 1px solid var(--input-border-color);
+            margin: 5px 0 20px;
+            border-radius: 4px;
+            transition: border 160ms linear;
+            outline: none;
+            text-align: center;
+        }
+
+        .formLogin input:focus {
+            border: 1px solid var(--input-focus-border-color);
+        }
+
+        .formLogin label {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .formLogin a {
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #919191;
+            transition: color 160ms linear;
+        }
+
+        .formLogin a:hover {
+            color: var(--primary-color);
         }
 
         .btn {
-            background-color: #ec50d7;
-            color: white;
+            background-color: var(--primary-color);
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
             border: none;
-            padding: 10px 20px;
-            border-radius: 10px;
-            font-weight: bold;
-            font-size: 1em;
             cursor: pointer;
-            transition: background-color 0.3s ease;
-            width: 100%;
+            transition: transform 160ms linear, background-color 160ms linear;
+            width: 100%; 
         }
 
         .btn:hover {
-            background-color: #b930a6;
+            transform: scale(1.05);
+            background-color: #ff0676;
         }
 
-        .mensagem {
-            color: #e03737;
-            font-size: 0.9em;
-            margin-top: 10px;
-            font-weight: bold;
+        @media (max-width: 400px) {
+            .formLogin {
+                width: 90%;
+                padding: 20px;
+            }
+
+            .formLogin h1 {
+                font-size: 1.5em;
+            }
         }
 
-        a {
-            color: #ff9ff3;
-            text-decoration: none;
-            font-weight: bold;
-            display: inline-block;
-            margin-top: 20px;
-            transition: color 0.3s ease;
-        }
-
-        a:hover {
-            color: #c56cf0; 
+        .erro {
+            color: rgb(255, 0, 119) !important;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <form action="{{ url_for('vamos_arrasar.login') }}" method="POST">
-            <h1>Login do Usuário</h1>
+    <div class="formLogin">
+        <form action="{{url_for('vamos_arrasar.login')}}" method="POST">
+            <h1>Login do usuário</h1>
             <p>Digite seus dados:</p>
             <label for="username">Nome de usuário</label>
-            <input type="text" id="username" name="username" placeholder="Digite seu nome de usuário" required>
+            <input type="text" id="username" name="username" placeholder="digite seu nome de usuário" required>
+            <br>
             <label for="password">Senha do usuário</label>
-            <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
+            <input type="password" id="password" name="password" placeholder="digite sua senha" required>
             <input type="submit" value="Acessar" class="btn">
-            {% with mensagens = get_flashed_messages(with_categories=True) %}
+            {% with mensagens = get_flashed_messages(with_categories = True)  %}
                 {% if mensagens %}
                     {% for c, mensagem in mensagens %}
-                        <p class="mensagem {{c}}">{{mensagem}}</p>
+                        <p class="{{c}}">{{mensagem}}</p>
                     {% endfor %}
                 {% endif %}
             {% endwith %}
         </form>
-        <a href="{{ url_for('vamos_arrasar.visu') }}">Voltar</a>
+        <a href="{{url_for('vamos_arrasar.visu')}}">Voltar</a>
     </div>
 </body>
 </html>
+

@@ -1,106 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Versículos</title>
-    <style>
-        body {
-            background-color: #fef9e7;
-            font-family: 'Comic Sans MS', 'Arial', sans-serif; 
-            color: #333;
-            text-align: center;
-            padding: 20px;
-            margin: 0;
-        }
-
-        h1 {
-            color: #da429b; 
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-
-        h2 {
-            color: #6c5ce7; 
-            margin-bottom: 20px;
-            font-size: 1.5em;
-        }
-
-        form {
-            background-color: #fff3e0;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            display: inline-block;
-        }
-
-        label {
-            font-size: 1.1em;
-            display: block;
-            margin: 10px 0;
-            color: #2d3436; 
-        }
-
-        input[type="radio"] {
-            margin-right: 10px;
-        }
-
-        button {
-            background-color: #cd1cbe; 
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 10px;
-            font-size: 1em;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #9e09e3; 
-        }
-
-        a {
-            color: #ed85e1; 
-            text-decoration: none;
-            font-weight: bold;
-            display: inline-block;
-            margin-top: 20px;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        p {
-            margin-top: 30px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tela inicial</title>
 </head>
+
 <body>
-    {% if nome_usuario %}
-        <h1>Bem-vindo, {{ nome_usuario }}</h1>
-        <h2>Escolha um tópico e veja o que o Senhor tem a dizer a você!</h2>
-        <form action="{{ url_for('vamos_arrasar.resposta') }}" method="POST">
-            <label>
-                <input type="radio" name="opcao1"> Amor ao próximo
-            </label><br>
-            <label>
-                <input type="radio" name="opcao2"> Paz
-            </label><br>
-            <label>
-                <input type="radio" name="opcao3"> Solidão
-            </label><br>
-            <label>
-                <input type="radio" name="opcao4"> Cansaço
-            </label><br>
-            <button type="submit">Enviar</button>
-        </form>
-        <p><a href="{{ url_for('vamos_arrasar.logout') }}">Logout</a></p>
-    {% else %}
-        <h1>Bem-vindo!</h1>
-        <h2>Clique aqui para logar:</h2>
-        <p><a href="{{ url_for('vamos_arrasar.login') }}">Login</a></p>
-    {% endif %}
+  {% if nome_usuario %}
+      <h1>Bem-vindo, {{ nome_usuario }}</h1>
+         <h2>Escolha um tópico e veja o que Senhor te diz!:</h2>
+            <h3>Por favor, selecione um tópico</h3>
+                <form action="{{ url_for('vamos_arrasar.selecionar_topico') }}" method="post">
+                   <label for="topico">Selecione um tópico:</label>
+                     <select name="topico" required>
+                       {% if topicos %}
+                         {% for topico in topicos %}
+                            <opction value="{{ topico }}">{{ topico }}</opction>
+                          {% endfor %}
+                        {% else %}
+                            <opction value="">Nenhum tópico acessado</opction>
+                        {% endif %}
+                       </select>
+                        <button type="submit">Ver a mensagem do Senhor para você:</button>
+                 </form>
+                      <p><a href="{{ url_for('vamos_arrasar.logout') }}">Logout</a></p>
+   {% else %}
+      <h1>Bem vind@!</h1>
+        <h2>Venha se aproximar mais de Jesus!</h2>
+          <h3>Acesse sua conta!:</h3>
+           <p><a href="{{ url_for('vamos_arrasar.login') }}">Login</a></p>
+      {% endif %}
 </body>
+
 </html>

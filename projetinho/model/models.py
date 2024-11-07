@@ -5,3 +5,4 @@ class User:
 
 usuarios = [ User("Filha amada", "123clt"), User("Filho amado", "456")]
 
+#simulação de um banco de dados 

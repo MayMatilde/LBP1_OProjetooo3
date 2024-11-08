@@ -23,6 +23,7 @@ def login ():
                 session['name'] = usuario.nome
                 return redirect(url_for('vamos_arrasar.resposta')) #renderiza a função resposta, porque deu certo
         flash('Usuário ou senha inválidos!', 'erro')
+        return render_template('401.html')
     return render_template('index.html')
 
 #A rota que deu certo  😉
@@ -55,7 +56,9 @@ def logout():
     resp.set_cookie("versiculo4", "", expires = 0)
     return redirect(url_for('vamos_arrasar.login'))
 
-
+@vamos_arrasar.route('/unathhorized')
+def unathhorized():
+    return render_template('401.html'), 401
 
 #request = pedido 
 #  ____________Sessão_____________
